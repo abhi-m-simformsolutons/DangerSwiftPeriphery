@@ -26,8 +26,10 @@ extension Shell: ShellExecutable {
             Logger.shared.debug("command output: " + output)
             return .success(output)
         } catch let error as ShellError {
+            Logger.shared.debug("command error: " + error.description)
             return .failure(.standard(exitCode: error.exitStatus, description: error.description))
         } catch {
+            Logger.shared.debug("command error: " + error.localizedDescription)
             return .failure(.unknown(error: error))
         }
     }
